@@ -30,7 +30,7 @@ RUN apt-get update -y && apt-get install -y lsb-release
 
 # Add ROS repository.
 RUN echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
-RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 0xB01FA116
+RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
 RUN apt-get update -y && apt-get install -y \
     bzip2 \
@@ -58,7 +58,7 @@ ENV IMCTRANS_VERSION=0.1.6
 RUN pip3 install "imctrans==$IMCTRANS_VERSION"
 
 # Install simulator.
-ENV DUNE_URL=http://www.omst.pt/dune/dune-2017.11.10-x86-64bit-linux-glibc-gcc54.tar.bz2
+ENV DUNE_URL=http://www.omst.pt/dune/dune-2018.01.00-x86-64bit-linux-glibc-gcc54.tar.bz2
 RUN mkdir /opt/lsts && \
     wget -q "$DUNE_URL" -O - | tar -C /opt/lsts -x -j -v -f - && \
     mv /opt/lsts/dune-* /opt/lsts/dune
