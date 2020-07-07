@@ -121,7 +121,7 @@ generate_dynamic_reconfigure_options(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include vendor/libraries
-  LIBRARIES ros_imc_md5
+  LIBRARIES imc_broker_factory ros_imc_md5
   CATKIN_DEPENDS roscpp std_msgs message_runtime
   DEPENDS system_lib
 )
@@ -156,11 +156,12 @@ endforeach(extlib ${extlibs})
 # add_dependencies(ros_imc_broker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(ros_imc_broker_node src/broker_node.cpp include/IMC/Base/Factory.cpp)
+add_library(imc_broker_factory include/IMC/Base/Factory.cpp)
+add_executable(ros_imc_broker_node src/broker_node.cpp)
 add_dependencies(ros_imc_broker_node ${PROJECT_NAME}_gencfg)
-add_executable(follow_reference_node src/follow_reference_node.cpp include/IMC/Base/Factory.cpp)
-add_executable(params_changer_node src/params_changer_node.cpp include/IMC/Base/Factory.cpp)
-add_executable(ros_imc_adapter_node src/adapter_node.cpp include/IMC/Base/Factory.cpp)
+add_executable(follow_reference_node src/follow_reference_node.cpp)
+add_executable(params_changer_node src/params_changer_node.cpp)
+add_executable(ros_imc_adapter_node src/adapter_node.cpp)
 add_dependencies(ros_imc_adapter_node ${PROJECT_NAME}_gencfg)
 add_dependencies(ros_imc_adapter_node ${PROJECT_NAME}_gencfg)
 
@@ -170,21 +171,25 @@ add_dependencies(ros_imc_adapter_node ${PROJECT_NAME}_gencfg)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(ros_imc_broker_node
+  imc_broker_factory
   ros_imc_md5
   ${catkin_LIBRARIES}
 )
 
 target_link_libraries(follow_reference_node
+  imc_broker_factory
   ros_imc_md5
   ${catkin_LIBRARIES}
 )
 
 target_link_libraries(params_changer_node
+  imc_broker_factory
   ros_imc_md5
   ${catkin_LIBRARIES}
 )
 
 target_link_libraries(ros_imc_adapter_node
+  imc_broker_factory
   ros_imc_md5
   ${catkin_LIBRARIES}
 )
