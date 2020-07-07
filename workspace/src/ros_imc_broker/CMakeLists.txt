@@ -123,7 +123,8 @@ catkin_package(
   INCLUDE_DIRS include vendor/libraries
   LIBRARIES imc_broker_factory ros_imc_md5
   CATKIN_DEPENDS roscpp std_msgs message_runtime
-  DEPENDS system_lib Boost
+  #DEPENDS system_lib Boost
+  DEPENDS Boost
 )
 
 ###########
