@@ -123,7 +123,7 @@ catkin_package(
   INCLUDE_DIRS include vendor/libraries
   LIBRARIES imc_broker_factory ros_imc_md5
   CATKIN_DEPENDS roscpp std_msgs message_runtime
-  DEPENDS system_lib
+  DEPENDS system_lib Boost
 )
 
 ###########
@@ -214,6 +214,11 @@ target_link_libraries(ros_imc_adapter_node
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
+install(TARGETS imc_broker_factory ros_imc_broker_node follow_reference_node params_changer_node ros_imc_adapter_node
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
@@ -221,6 +226,11 @@ target_link_libraries(ros_imc_adapter_node
 #   FILES_MATCHING PATTERN "*.h"
 #   PATTERN ".svn" EXCLUDE
 # )
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h"
+  PATTERN ".svn" EXCLUDE
+)
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 # install(FILES
