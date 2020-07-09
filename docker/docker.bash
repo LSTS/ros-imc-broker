@@ -32,7 +32,7 @@ build()
 shell()
 {
         VOLPCK=''
-        for fx in cfg launch package.xml src CMakeLists.txt include LICENSE README.md start.bash; do
+        for fx in cfg launch package.xml src CMakeLists.txt include LICENSE README.md start.bash startAdapter.bash vendor; do
                 VOLPCK="$VOLPCK -v $VOLUME/$fx:$VOLUME/tmp/workspace/src/$TAG/$fx";
         done
         #-v "$VOLUME:$VOLUME/tmp/workspace/src/$TAG" \
